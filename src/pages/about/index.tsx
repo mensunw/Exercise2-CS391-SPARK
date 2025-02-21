@@ -5,8 +5,10 @@ export default function About() {
     const [name, setName] = useState("");
     useEffect(() => {
         async function getData() {
-            const data = await fetch("api/hello.ts").then((res) => res.json())
-            setName(data)
+            const data = fetch("api/hello")
+            data
+                .then((res) => res.json())
+                .then((stuff) => setName(stuff.name))
         }
         getData()
     }, [])
@@ -14,7 +16,7 @@ export default function About() {
     return (
         <div>
             <br />
-            <h1>About me: {name}</h1>
+            <h1>About me: {name ? `my name is ${name}` : "loading name"}</h1>
             <h2>{"I'm a SWE and I don't like Java that much."}</h2>
             <br />
             <Link href="/blog">Go to Blog</Link>
