@@ -5,10 +5,9 @@ export default function About() {
     const [name, setName] = useState("");
     useEffect(() => {
         async function getData() {
-            const data = fetch("api/hello")
-            data
-                .then((res) => res.json())
-                .then((stuff) => setName(stuff.name))
+            const data = await fetch("api/hello")
+            const res = await data.json()
+            setName(res.name)
         }
         getData()
     }, [])
